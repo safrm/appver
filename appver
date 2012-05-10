@@ -1,0 +1,34 @@
+#/bin/sh
+#easier way how to handle version formats  https://github.com/safrm/appver
+#author:  Miroslav Safr <miroslav.safr@gmail.com>
+#version:
+
+APP_FULL_VERSION_TAG=`git describe --abbrev=0 2> /dev/null`
+APP_SHORT_VERSION_TAG=`git describe --abbrev=0 2> /dev/null`
+APP_BUILD_DATE=`date +'%Y%m%d_%H%M'`
+
+if [ "xAPP_FULL_VERSION_TAG" = "x" ]
+then
+  APP_FULL_VERSION_TAG=NA
+fi
+echo "APP_FULL_VERSION_TAG=$APP_FULL_VERSION_TAG"
+
+if [ "xAPP_SHORT_VERSION_TAG" = "x" ]
+then
+  APP_SHORT_VERSION_TAG=NA
+fi
+echo "APP_SHORT_VERSION_TAG=$APP_SHORT_VERSION_TAG"
+
+if [ "xAPP_BUILD_DATE" = "x" ]
+then
+  APP_BUILD_DATE=NA
+fi
+echo "APP_BUILD_DATE=$APP_BUILD_DATE"
+
+#combinations
+APP_FULL_VERSION_AND_DATE="$APP_FULL_VERSION_TAG ($APP_BUILD_DATE)"
+
+export APP_FULL_VERSION_TAG=$APP_FULL_VERSION_TAG
+export APP_SHORT_VERSION_TAG=$APP_SHORT_VERSION_TAG
+export APP_BUILD_DATE=$APP_BUILD_DATE
+export APP_FULL_VERSION_AND_DATE="$APP_FULL_VERSION_AND_DATE"
