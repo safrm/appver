@@ -1,0 +1,8 @@
+debian/changelog
+appver.changes
+debian/appver.debhelper.log
+debian/appver.substvars
+debian/appver/
+debian/files
+rpm/*
+
