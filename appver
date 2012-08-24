@@ -3,7 +3,7 @@
 #author:  Miroslav Safr <miroslav.safr@gmail.com>
 #version:
 
-APP_FULL_VERSION_TAG=`git describe --abbrev=0 2> /dev/null`
+APP_FULL_VERSION_TAG=`git describe --tags --dirty=* 2> /dev/null`
 APP_SHORT_VERSION_TAG=`git describe --abbrev=0 2> /dev/null`
 APP_BUILD_DATE=`date +'%Y%m%d_%H%M'`
 
