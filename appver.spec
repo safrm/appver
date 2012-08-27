@@ -1,4 +1,5 @@
 %define buildroot %{_topdir}/%{name}-%{version}-root
+%define APP_BUILD_DATE %(date +'%%Y%%m%%d_%%H%%M')
 
 Name:       appver
 Summary:    smart way how to handle versions
@@ -40,6 +41,7 @@ mkdir -p %{buildroot}%{_bindir}
 mkdir -p %{buildroot}%{_datadir}/doc/appver
 install -m 755 ./appver %{buildroot}/usr/bin/
 sed -i".bkp" "1,/^VERSION=/s/^VERSION=.*/VERSION=%{version}/" %{buildroot}%{_bindir}/appver && rm -f %{buildroot}%{_bindir}/appver.bkp
+sed -i".bkp" "1,/^VERSION_DATE=/s/^VERSION_DATE=.*/VERSION_DATE=%{APP_BUILD_DATE}/" %{buildroot}%{_bindir}/appver && rm -f %{buildroot}%{_bindir}/appver.bkp
 install -m 644 ./README %{buildroot}%{_datadir}/doc/appver
 sed -i".bkp" "1,/Version: /s/Version:   */Version:   %{version}/"  %{buildroot}%{_datadir}/doc/appver/README && rm -f %{buildroot}%{_datadir}/doc/appver/README.bkp
 install -m 644 ./LICENSE.LGPL %{buildroot}%{_datadir}/doc/appver

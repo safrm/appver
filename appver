@@ -1,7 +1,8 @@
 #/bin/sh
 #easier way how to handle version formats  https://github.com/safrm/appver
 #author:  Miroslav Safr <miroslav.safr@gmail.com>
-#version:
+VERSION=NA                                                                   
+VERSION_DATE=NA
 
 APP_FULL_VERSION_TAG=`git describe --tags --dirty=* 2> /dev/null`
 APP_SHORT_VERSION_TAG=`git describe --abbrev=0 2> /dev/null`
