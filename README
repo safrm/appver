@@ -24,3 +24,7 @@ declare -x APP_FULL_VERSION_AND_DATE="0.0.1 (20120510_1312)"
 declare -x APP_FULL_VERSION_TAG="0.0.1"
 declare -x APP_SHORT_VERSION_TAG="0.0.1"
 
+
+ussage in scripts without dependency
+#automatic version 
+if [ command -v appver >/dev/null 2>&1 ]; then . appver; else APP_FULL_VERSION_TAG=NA ; APP_BUILD_DATE=`date +'%Y%m%d_%H%M'`; fi
