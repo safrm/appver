@@ -2,12 +2,12 @@ name: appver
 author:  Miroslav Safr <miroslav.safr@gmail.com> 
 web: https://github.com/safrm/appver
 version:
-description: multiplatformal/distribution system dumping and comparation
+description: multiplatformal version number/version time helper
 
 content: 
  appver .................. script to pass or export git version in given format
  install.sh .............. executes installation to /urs/bin dir
-
+ 
 usage:
 . appver .............. export version variables to current terminal e.g. APP_FULL_VERSION_TAG
 appver ................ print version variables to stdout
