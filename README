@@ -25,6 +25,34 @@ declare -x APP_FULL_VERSION_TAG="0.0.1"
 declare -x APP_SHORT_VERSION_TAG="0.0.1"
 
 
-ussage in scripts without dependency
+ussage in scripts without dependency:
 #automatic version 
 if [ command -v appver >/dev/null 2>&1 ]; then . appver; else APP_FULL_VERSION_TAG=NA ; APP_BUILD_DATE=`date +'%Y%m%d_%H%M'`; fi
+
+
+qmake usage:
+#appver, win/lin version system
+APP_VERSION_FULL=NA
+APP_VERSION_SHORT=NA
+unix {
+  exists( /usr/bin/appver ) {
+    . /usr/bin/appver
+  } else {
+    APP_DATE_SYS=$$system(date +'\"%Y%m%d_%H%M\"')
+    APP_VERSION_FULL=$$system(git describe --tags  --dirty=* 2> /dev/null)
+    APP_VERSION_SHORT=$$system(git describe --tags --abbrev=0 2> /dev/null)
+  }
+}
+win32 {
+  APP_DATE_SYS=$$system(echo \"%date:~9,4%%date:~6,2%%date:~3,2%_%time:~0,2%%time:~3,2%\")
+  exists("C:\\progs\\Git\\bin\\sh.exe") {
+      APP_VERSION_FULL=$$system("C:\\progs\\Git\\bin\\sh.exe" -c \"/bin/git describe --tags  --dirty=* 2> /dev/null  \")
+      APP_VERSION_SHORT=$$system("C:\\progs\\Git\\bin\\sh.exe" -c \"/bin/git describe --tags --abbrev=0 2> /dev/null  \")
+   }
+}
+message("APP_DATE_SYS = " $$APP_DATE_SYS)
+DEFINES += APP_DATE=\\\"$$APP_DATE_SYS\\\"
+message("APP_VERSION_FULL = " $$APP_VERSION_FULL)
+DEFINES += APP_VERSION_FULL=\\\"$$APP_VERSION_FULL\\\"
+DEFINES += APP_VERSION_SHORT=\\\"$$APP_VERSION_SHORT\\\"
+message("APP_VERSION_SHORT = " $$APP_VERSION_SHORT)
