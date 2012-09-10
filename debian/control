@@ -2,12 +2,12 @@ Source: appver
 Section: libs
 Priority: optional
 Maintainer: Miroslav Safr <miroslav.safr@gmail.com>
-Build-Depends: debhelper (>= 5)
+Build-Depends: debhelper (>= 5),git-core, rpmmake
 Standards-Version: 1.0.0
 
 Package: appver
 Architecture: all
-Depends: debhelper (>= 5), git-core,  ${misc:Depends}, ${launcher:Depends}, ${shlibs:Depends}
+Depends: debhelper (>= 5), git-core, rpmmake, ${misc:Depends}, ${launcher:Depends}, ${shlibs:Depends}
 Description: Smart way how to handle versions
 
 

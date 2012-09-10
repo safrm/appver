@@ -1,6 +1,15 @@
 #!/usr/bin/make -f
 DEB_VERBOSE_ALL=yes
 export DH_VERBOSE=1
+	
 
 %:
 	dh  $@
+
+
+override_dh_installchangelogs:
+	rpmmake-debchangelog
+	dh_installchangelogs debian/changelog
+override_dh_auto_build:
+	. appver
+	dh_auto_build
