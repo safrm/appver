@@ -1,5 +1,5 @@
 #/bin/sh
-#easier way how to handle version formats  https://github.com/safrm/appver
+#easier way how to handle version formats  https://safrm.net/projects/appver
 #author:  Miroslav Safr <miroslav.safr@gmail.com>
 VERSION=NA                                                                   
 VERSION_DATE=NA

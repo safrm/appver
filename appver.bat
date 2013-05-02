@@ -1,4 +1,4 @@
-REM easier way how to handle version formats  https://github.com/safrm/appver
+REM easier way how to handle version formats http://safrm.net/projects/appver/
 REM author:  Miroslav Safr <miroslav.safr@gmail.com>
 REM version:
 

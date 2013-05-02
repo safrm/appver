@@ -1,6 +1,6 @@
 name: appver
 author:  Miroslav Safr <miroslav.safr@gmail.com> 
-web: https://github.com/safrm/appver
+web: http://safrm.net/projects/appver/
 version:
 description: multiplatformal version number/version time helper
 
