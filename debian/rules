@@ -11,5 +11,5 @@ override_dh_installchangelogs:
 	rpmmake-debchangelog
 	dh_installchangelogs debian/changelog
 override_dh_auto_build:
-	. appver
+	./appver
 	dh_auto_build

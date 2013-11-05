@@ -1,4 +1,3 @@
-%define buildroot %{_topdir}/%{name}-%{version}-root
 %define APP_BUILD_DATE %(date +'%%Y%%m%%d_%%H%%M')
 
 Name:       appver
@@ -18,25 +17,14 @@ BuildRoot: %{buildroot}
 %description
 smart way how to handle versions
 
-
-
 %prep
 %setup -c -n ./%{name}-%{version}
-# >> setup
-# << setup
 
 %build
-# >> build pre
-# << build pre
-
-# >> build post
-# << build post
 
 %install
-rm -fr $RPM_BUILD_ROOT
-# >> install pre
-export INSTALL_ROOT=$RPM_BUILD_ROOT
-# << install pre 
+rm -fr %{buildroot}
+
 mkdir -p %{buildroot}%{_bindir}
 mkdir -p %{buildroot}%{_datadir}/doc/appver
 install -m 755 ./appver %{buildroot}/usr/bin/
@@ -46,16 +34,11 @@ install -m 644 ./README %{buildroot}%{_datadir}/doc/appver
 sed -i".bkp" "1,/Version: /s/Version:   */Version:   %{version} %{APP_BUILD_DATE}/"  %{buildroot}%{_datadir}/doc/appver/README && rm -f %{buildroot}%{_datadir}/doc/appver/README.bkp
 install -m 644 ./LICENSE.LGPL %{buildroot}%{_datadir}/doc/appver
 
-# >> install post
-# << install post
-
 %files
 %defattr(-,root,root,-)
-# >> files
 %{_bindir}/appver
 %dir %{_datadir}/doc/appver
 %{_datadir}/doc/appver/README
 %{_datadir}/doc/appver/LICENSE.LGPL
-# << files
 
 
