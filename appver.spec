@@ -12,7 +12,6 @@ Vendor:     Miroslav Safr <miroslav.safr@gmail.com>
 Source0:    %{name}-%{version}.tar.bz2
 Autoreq: on
 Autoreqprov: on
-BuildRoot: %{buildroot}
 
 %description
 smart way how to handle versions
@@ -34,11 +33,22 @@ install -m 644 ./README %{buildroot}%{_datadir}/doc/appver
 sed -i".bkp" "1,/Version: /s/Version:   */Version:   %{version} %{APP_BUILD_DATE}/"  %{buildroot}%{_datadir}/doc/appver/README && rm -f %{buildroot}%{_datadir}/doc/appver/README.bkp
 install -m 644 ./LICENSE.LGPL %{buildroot}%{_datadir}/doc/appver
 
+%check
+for TEST in $(  grep -r -l -h "#\!/bin/sh" . )
+do
+		sh -n $TEST
+		if  [ $? != 0 ]; then
+			echo "syntax error in $TEST, exiting.." 
+			exit 1
+		fi
+done 
+
 %files
 %defattr(-,root,root,-)
 %{_bindir}/appver
 %dir %{_datadir}/doc/appver
 %{_datadir}/doc/appver/README
 %{_datadir}/doc/appver/LICENSE.LGPL
+
 
 
