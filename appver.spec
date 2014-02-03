@@ -4,7 +4,7 @@ Name:       appver
 Summary:    smart way how to handle versions
 Version:    1.0.0
 Release:    1
-Group:      System/Libraries
+Group:      Development/Tools
 License:    LGPL v2.1
 BuildArch:  noarch
 URL:        http://safrm.net/projects/appver/

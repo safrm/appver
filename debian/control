@@ -1,5 +1,5 @@
 Source: appver
-Section: libs
+Section: devel
 Priority: optional
 Maintainer: Miroslav Safr <miroslav.safr@gmail.com>
 Build-Depends: debhelper (>= 5),git-core, rpmmake, xsltproc, docbook-xsl
