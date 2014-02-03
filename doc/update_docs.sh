@@ -19,8 +19,9 @@ if [ ! -e $MANXSL ]; then
 	MANXSL=http://docbook.sourceforge.net/release/xsl/current/html/docbook.xsl
 fi
 
-#automatic version 
-if command -v appver &>/dev/null; then . appver; else APP_SHORT_VERSION=NA ; APP_FULL_VERSION_TAG=NA ; APP_BUILD_DATE=`date +'%Y%m%d_%H%M'`; fi
+#automatic version to avoid package recures
+#if command -v appver &>/dev/null; then . appver; else APP_SHORT_VERSION=NA ; APP_FULL_VERSION_TAG=NA ; APP_BUILD_DATE=`date +'%Y%m%d_%H%M'`; fi
+. ../appver
 
 TEMP_DIR=./tmp
 rm -fr $TEMP_DIR && mkdir $TEMP_DIR
