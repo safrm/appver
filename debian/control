@@ -7,7 +7,7 @@ Standards-Version: 1.0.0
 
 Package: appver
 Architecture: all
-Depends: git-core, ${misc:Depends}, ${launcher:Depends}, ${shlibs:Depends}
+Depends: git-core
 Description: Smart way how to handle versions
 
 

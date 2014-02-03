@@ -1,0 +1,32 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>appver</title><meta name="generator" content="DocBook XSL Stylesheets V1.76.1"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="refentry" title="appver"><a name="appver.1"></a><div class="titlepage"></div><div class="refnamediv"><h2>Name</h2><p>appver &#8212; Easier way how to handle version formats using git describe version formats</p></div><div class="refsynopsisdiv" title="Synopsis"><h2>Synopsis</h2><div class="cmdsynopsis"><p><code class="command">appver</code> </p></div></div><div class="refsect1" title="DESCRIPTION"><a name="idp108856"></a><h2>DESCRIPTION</h2><p>
+      Version strings based on git tags and building date strings are exported to building shell:
+      APP_FULL_VERSION_TAG, APP_SHORT_VERSION_TAG, APP_BUILD_DATE, APP_FULL_VERSION_AND_DATE
+    </p></div><div class="refsect1" title="EXAMPLES"><a name="idp109576"></a><h2>EXAMPLES</h2><p>
+      shell usage
+      </p><pre class="screen">
+         $ appver 
+         APP_FULL_VERSION_TAG=1.0.1
+         APP_SHORT_VERSION_TAG=1.0.1
+         APP_BUILD_DATE=20140203_1618
+      </pre><p>
+    </p><p>
+      qmake usage
+      </p><pre class="screen">
+        APP_FULL_VERSION_TAG=NA
+        APP_SHORT_VERSION_TAG=NA
+        exists( /usr/bin/appver ) {
+            system(/usr/bin/appver &gt; ./appver.pri)
+            include(./appver.pri)
+          } else {
+            APP_BUILD_DATE=$$system(date +'\"%Y%m%d_%H%M\"')
+            APP_FULL_VERSION_TAG=$$system(git describe --tags  --dirty=* 2&gt; /dev/null)
+            APP_SHORT_VERSION_TAG=$$system(git describe --tags --abbrev=0 2&gt; /dev/null)
+          }
+      </pre><p>
+    </p></div><div class="refsect1" title="SEE ALSO"><a name="idp111520"></a><h2>SEE ALSO</h2><p>
+      <a class="ulink" href="http://safrm.net/projects/APPVER/" target="_top">http://safrm.net/projects/APPVER/</a>
+    </p></div><div class="refsect1" title="AUTHOR"><a name="idp112280"></a><h2>AUTHOR</h2>
+    Miroslav &#352;afr &lt;miroslav.safr@gmail.com&gt;
+  </div><div class="refsect1" title="LICENSE"><a name="idp112736"></a><h2>LICENSE</h2>
+   LGPL2
+  </div></div></body></html>

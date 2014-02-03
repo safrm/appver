@@ -5,4 +5,4 @@ debian/appver.substvars
 debian/appver/
 debian/files
 rpm/*
-
+doc/tmp/*
