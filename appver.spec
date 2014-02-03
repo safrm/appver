@@ -20,6 +20,7 @@ smart way how to handle versions
 %setup -c -n ./%{name}-%{version}
 
 %build
+cd doc && ./update_docs.sh && cd -
 
 %install
 rm -fr %{buildroot}
@@ -49,6 +50,8 @@ done
 %dir %{_datadir}/doc/appver
 %{_datadir}/doc/appver/README
 %{_datadir}/doc/appver/LICENSE.LGPL
+%{_mandir}/man1/appver.1*
+
 
 
 

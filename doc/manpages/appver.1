@@ -1,0 +1,93 @@
+'\" t
+.\"     Title: appver
+.\"    Author: Miroslav Safr <miroslav.safr@gmail.com>
+.\" Generator: DocBook XSL Stylesheets v1.76.1 <http://docbook.sf.net/>
+.\"      Date: 20140203_1623
+.\"    Manual: Easier way how to handle version formats
+.\"    Source: appver 1.0.1
+.\"  Language: English
+.\"
+.TH "APPVER" "1" "20140203_1623" "appver 1.0.1" "Easier way how to handle versi"
+.\" -----------------------------------------------------------------
+.\" * Define some portability stuff
+.\" -----------------------------------------------------------------
+.\" ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+.\" http://bugs.debian.org/507673
+.\" http://lists.gnu.org/archive/html/groff/2009-02/msg00013.html
+.\" ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+.ie \n(.g .ds Aq \(aq
+.el       .ds Aq '
+.\" -----------------------------------------------------------------
+.\" * set default formatting
+.\" -----------------------------------------------------------------
+.\" disable hyphenation
+.nh
+.\" disable justification (adjust text to left margin only)
+.ad l
+.\" -----------------------------------------------------------------
+.\" * MAIN CONTENT STARTS HERE *
+.\" -----------------------------------------------------------------
+.SH "NAME"
+appver \- Easier way how to handle version formats using git describe version formats
+.SH "SYNOPSIS"
+.HP \w'\fBappver\fR\ 'u
+\fBappver\fR
+.SH "DESCRIPTION"
+.PP
+Version strings based on git tags and building date strings are exported to building shell: APP_FULL_VERSION_TAG, APP_SHORT_VERSION_TAG, APP_BUILD_DATE, APP_FULL_VERSION_AND_DATE
+.SH "EXAMPLES"
+.PP
+shell usage
+.sp
+.if n \{\
+.RS 4
+.\}
+.nf
+         $ appver 
+         APP_FULL_VERSION_TAG=1\&.0\&.1
+         APP_SHORT_VERSION_TAG=1\&.0\&.1
+         APP_BUILD_DATE=20140203_1618
+      
+.fi
+.if n \{\
+.RE
+.\}
+.PP
+qmake usage
+.sp
+.if n \{\
+.RS 4
+.\}
+.nf
+        APP_FULL_VERSION_TAG=NA
+        APP_SHORT_VERSION_TAG=NA
+        exists( /usr/bin/appver ) {
+            system(/usr/bin/appver > \&./appver\&.pri)
+            include(\&./appver\&.pri)
+          } else {
+            APP_BUILD_DATE=$$system(date +\*(Aq\e"%Y%m%d_%H%M\e"\*(Aq)
+            APP_FULL_VERSION_TAG=$$system(git describe \-\-tags  \-\-dirty=* 2> /dev/null)
+            APP_SHORT_VERSION_TAG=$$system(git describe \-\-tags \-\-abbrev=0 2> /dev/null)
+          }
+      
+.fi
+.if n \{\
+.RE
+.\}
+.sp
+.SH "SEE ALSO"
+.PP
+
+\m[blue]\fB\%http://safrm.net/projects/APPVER/\fR\m[]
+.SH "AUTHOR"
+
+    Miroslav Šafr <miroslav\&.safr@gmail\&.com>
+  .SH "LICENSE"
+
+   LGPL2
+  .SH "AUTHOR"
+.PP
+\fBMiroslav Safr\fR <\&miroslav\&.safr@gmail\&.com\&>
+.RS 4
+Author and maintainer
+.RE
