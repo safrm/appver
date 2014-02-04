@@ -1,6 +1,5 @@
 #!/bin/sh
-#extended recursive search for documents - combined files (html, doc, pdf, ppt, txt)
-#web: http://safrm.net/projects/efind
+#web: http://safrm.net/projects/appver
 #author: Miroslav Safr <miroslav.safr@gmail.com> 
 
 XSLTPROC=/usr/bin/xsltproc 
