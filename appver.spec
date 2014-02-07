@@ -32,6 +32,9 @@ mkdir -p %{buildroot}%{_datadir}/doc/appver
 install -m 755 ./appver %{buildroot}/usr/bin/
 sed -i".bkp" "1,/^VERSION=/s/^VERSION=.*/VERSION=%{version}/" %{buildroot}%{_bindir}/appver && rm -f %{buildroot}%{_bindir}/appver.bkp
 sed -i".bkp" "1,/^VERSION_DATE=/s/^VERSION_DATE=.*/VERSION_DATE=%{APP_BUILD_DATE}/" %{buildroot}%{_bindir}/appver && rm -f %{buildroot}%{_bindir}/appver.bkp
+install -d -m 755 %{buildroot}%{_mandir}/man1
+install -m 644 ./doc/manpages/appver.1* %{buildroot}%{_mandir}/man1
+install -d -m 755 %{buildroot}%{_docdir}/appver
 install -m 644 ./README %{buildroot}%{_datadir}/doc/appver
 sed -i".bkp" "1,/Version: /s/Version:   */Version:   %{version} %{APP_BUILD_DATE}/"  %{buildroot}%{_datadir}/doc/appver/README && rm -f %{buildroot}%{_datadir}/doc/appver/README.bkp
 install -m 644 ./LICENSE.LGPL %{buildroot}%{_datadir}/doc/appver
