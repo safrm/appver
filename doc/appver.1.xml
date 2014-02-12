@@ -26,7 +26,7 @@
 
 <refsynopsisdiv>
 	<cmdsynopsis>
-        <command>appver</command>
+        <command>appver [VERSION]</command>
 	</cmdsynopsis>
 </refsynopsisdiv>
 
@@ -37,15 +37,24 @@
     </para>
   </refsect1>
 
-
+  <refsect1><title>VERSION</title>
+    <para>
+      For packaging builds (without git tree) can be version strings passwd by argument. Than APP_FULL_VERSION_TAG, APP_SHORT_VERSION_TAG are st to release tag.
+      and APP_BUILD_DATE, APP_FULL_VERSION_AND_DATE are generated.
+    </para>
+  </refsect1>
+  
   <refsect1><title>EXAMPLES</title>
     <para>
       shell usage
       <screen format="linespecific">
-         $ appver 
+         $ . appver 
          APP_FULL_VERSION_TAG=1.0.1
          APP_SHORT_VERSION_TAG=1.0.1
          APP_BUILD_DATE=20140203_1618
+
+         $ echo $APP_FULL_VERSION_AND_DATE
+         1.0.1 (20140203_1618)
       </screen>
     </para>
     <para>
@@ -61,6 +70,15 @@
             APP_FULL_VERSION_TAG=$$system(git describe --tags  --dirty=* 2> /dev/null)
             APP_SHORT_VERSION_TAG=$$system(git describe --tags --abbrev=0 2> /dev/null)
           }
+      </screen>
+    </para>
+    <para>
+      releasing builds (from rpm  .spec)
+      <screen format="linespecific">
+         $ appver 1.0.2
+         APP_FULL_VERSION_TAG=1.0.2
+         APP_SHORT_VERSION_TAG=1.0.2
+         APP_BUILD_DATE=20140203_1618
       </screen>
     </para>
   </refsect1>

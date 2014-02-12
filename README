@@ -11,6 +11,7 @@ content:
 usage:
 . appver .............. export version variables to current terminal e.g. APP_FULL_VERSION_TAG
 appver ................ print version variables to stdout
+appver 1.x.x .......... for packaging builds (without git tree) can be version strings passwd by argument
 
 example:
 <my-project-dir> $ . appver 
@@ -25,10 +26,9 @@ declare -x APP_FULL_VERSION_TAG="0.0.1"
 declare -x APP_SHORT_VERSION_TAG="0.0.1"
 
 
-ussage in scripts without dependency:
+usage in scripts without dependency:
 #automatic version 
-if [ command -v appver >/dev/null 2>&1 ]; then . appver; else APP_FULL_VERSION_TAG=NA ; APP_BUILD_DATE=`date +'%Y%m%d_%H%M'`; fi
-
+if command -v appver &>/dev/null; then . appver; else APP_SHORT_VERSION=NA ; APP_FULL_VERSION_TAG=NA ; APP_BUILD_DATE=`date +'%Y%m%d_%H%M'`; fi
 
 qmake 2x usage:
 #appver, win/lin version system
@@ -60,3 +60,10 @@ message("APP_FULL_VERSION_TAG = " $$APP_FULL_VERSION_TAG)
 DEFINES += APP_FULL_VERSION_TAG=\\\"$$APP_FULL_VERSION_TAG\\\"
 DEFINES += APP_SHORT_VERSION_TAG=\\\"$$APP_SHORT_VERSION_TAG\\\"
 message("APP_SHORT_VERSION_TAG = " $$APP_SHORT_VERSION_TAG)
+
+
+releasing packaging:
+   $ appver 1.0.2
+   APP_FULL_VERSION_TAG=1.0.2
+   APP_SHORT_VERSION_TAG=1.0.2
+   APP_BUILD_DATE=20140203_1618

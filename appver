@@ -1,11 +1,17 @@
 #/bin/sh
 #easier way how to handle version formats  https://safrm.net/projects/appver
 #author:  Miroslav Safr <miroslav.safr@gmail.com>
-VERSION=NA                                                                   
+VERSION=NA
 VERSION_DATE=NA
 
-APP_FULL_VERSION_TAG=`git describe --tags --dirty=* 2> /dev/null`
-APP_SHORT_VERSION_TAG=`git describe --abbrev=0 2> /dev/null`
+#version can be forced by argument for packaging builds
+if [ -z "$1" ]; then
+    APP_FULL_VERSION_TAG=`git describe --tags --dirty=* 2> /dev/null`
+    APP_SHORT_VERSION_TAG=`git describe --abbrev=0 2> /dev/null`
+else
+    APP_FULL_VERSION_TAG="$1"
+    APP_SHORT_VERSION_TAG="$APP_FULL_VERSION_TAG"
+fi    
 APP_BUILD_DATE=`date +'%Y%m%d_%H%M'`
 
 if [ "xAPP_FULL_VERSION_TAG" = "x" ]
