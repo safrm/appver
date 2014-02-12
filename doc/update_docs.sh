@@ -1,6 +1,7 @@
 #!/bin/sh
 #web: http://safrm.net/projects/appver
 #author: Miroslav Safr <miroslav.safr@gmail.com> 
+#first argument passes release version for releasing package builds
 
 XSLTPROC=/usr/bin/xsltproc 
 if [ ! -e $MANXSL ]; then
@@ -20,7 +21,7 @@ fi
 
 #automatic version to avoid package recures
 #if command -v appver &>/dev/null; then . appver; else APP_SHORT_VERSION=NA ; APP_FULL_VERSION_TAG=NA ; APP_BUILD_DATE=`date +'%Y%m%d_%H%M'`; fi
-. ../appver
+. ../appver $1
 
 TEMP_DIR=./tmp
 rm -fr $TEMP_DIR && mkdir $TEMP_DIR

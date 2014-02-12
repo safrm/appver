@@ -22,7 +22,7 @@ smart way how to handle versions
 %setup -c -n ./%{name}-%{version}
 
 %build
-cd doc && ./update_docs.sh && cd -
+cd doc && ./update_docs.sh %{version} && cd -
 
 %install
 rm -fr %{buildroot}
