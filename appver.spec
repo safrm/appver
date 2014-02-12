@@ -12,8 +12,10 @@ Vendor:     Miroslav Safr <miroslav.safr@gmail.com>
 Source0:    %{name}-%{version}.tar.bz2
 Autoreq: on
 Autoreqprov: on
-BuildRequires:  xsltproc
-BuildRequires:  docbook-xsl
+#BuildRequires:  xsltproc
+BuildRequires:  libxslt
+#BuildRequires:  docbook-xsl
+BuildRequires: docbook-xsl-stylesheets
 
 %description
 smart way how to handle versions
