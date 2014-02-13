@@ -11,9 +11,9 @@ export DH_VERBOSE=1
 #	rpmmake-debchangelog
 #	dh_installchangelogs debian/changelog
 override_dh_auto_build:
-	DEBVERSION=$(dpkg-parsechangelog | sed -n -e 's/^Version: //p')
+	DEBVERSION=$(dpkg-parsechangelog | sed -n -e 's/^Version: //p' 2>/dev/null)
 	./appver $DEBVERSION
-	cd doc && ./update_docs.sh && cd -
+	cd doc && ./update_docs.sh $DEBVERSION && cd -
 	dh_auto_build
 	
 
