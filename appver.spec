@@ -37,9 +37,9 @@ sed -i".bkp" "1,/^VERSION_DATE=/s/^VERSION_DATE=.*/VERSION_DATE=%{APP_BUILD_DATE
 install -d -m 755 %{buildroot}%{_mandir}/man1
 install -m 644 ./doc/manpages/appver.1* %{buildroot}%{_mandir}/man1
 install -d -m 755 %{buildroot}%{_docdir}/appver
-install -m 644 ./README %{buildroot}%{_datadir}/doc/appver
-sed -i".bkp" "1,/Version: /s/Version:   */Version:   %{version} %{APP_BUILD_DATE}/"  %{buildroot}%{_datadir}/doc/appver/README && rm -f %{buildroot}%{_datadir}/doc/appver/README.bkp
-install -m 644 ./LICENSE.LGPL %{buildroot}%{_datadir}/doc/appver
+install -m 644 ./README %{buildroot}%{_docdir}/appver
+sed -i".bkp" "1,/Version: /s/Version:   */Version:   %{version} %{APP_BUILD_DATE}/"  %{buildroot}%{_docdir}/appver/README && rm -f %{buildroot}%{_docdir}/appver/README.bkp
+install -m 644 ./LICENSE.LGPL %{buildroot}%{_docdir}/appver
 
 %check
 for TEST in $(  grep -r -l -h "#\!/bin/sh" . )
@@ -54,9 +54,9 @@ done
 %files
 %defattr(-,root,root,-)
 %{_bindir}/appver
-%dir %{_datadir}/doc/appver
-%{_datadir}/doc/appver/README
-%{_datadir}/doc/appver/LICENSE.LGPL
+%dir %{_docdir}/appver
+%{_docdir}/appver/README
+%{_docdir}/appver/LICENSE.LGPL
 %{_mandir}/man1/appver.1*
 
 
