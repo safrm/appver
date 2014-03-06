@@ -2,12 +2,12 @@
 .\"     Title: appver
 .\"    Author: Miroslav Safr <miroslav.safr@gmail.com>
 .\" Generator: DocBook XSL Stylesheets v1.76.1 <http://docbook.sf.net/>
-.\"      Date: 20140203_1623
+.\"      Date: 20140306_1735
 .\"    Manual: Easier way how to handle version formats
-.\"    Source: appver 1.0.1
+.\"    Source: appver EBVERSION
 .\"  Language: English
 .\"
-.TH "APPVER" "1" "20140203_1623" "appver 1.0.1" "Easier way how to handle versi"
+.TH "APPVER" "1" "20140306_1735" "appver EBVERSION" "Easier way how to handle versi"
 .\" -----------------------------------------------------------------
 .\" * Define some portability stuff
 .\" -----------------------------------------------------------------
@@ -30,11 +30,14 @@
 .SH "NAME"
 appver \- Easier way how to handle version formats using git describe version formats
 .SH "SYNOPSIS"
-.HP \w'\fBappver\fR\ 'u
-\fBappver\fR
+.HP \w'\fBappver\ [VERSION]\fR\ 'u
+\fBappver [VERSION]\fR
 .SH "DESCRIPTION"
 .PP
 Version strings based on git tags and building date strings are exported to building shell: APP_FULL_VERSION_TAG, APP_SHORT_VERSION_TAG, APP_BUILD_DATE, APP_FULL_VERSION_AND_DATE
+.SH "VERSION"
+.PP
+For packaging builds (without git tree) can be version strings passwd by argument\&. Than APP_FULL_VERSION_TAG, APP_SHORT_VERSION_TAG are st to release tag\&. and APP_BUILD_DATE, APP_FULL_VERSION_AND_DATE are generated\&.
 .SH "EXAMPLES"
 .PP
 shell usage
@@ -43,10 +46,13 @@ shell usage
 .RS 4
 .\}
 .nf
-         $ appver 
+         $ \&. appver 
          APP_FULL_VERSION_TAG=1\&.0\&.1
          APP_SHORT_VERSION_TAG=1\&.0\&.1
          APP_BUILD_DATE=20140203_1618
+
+         $ echo $APP_FULL_VERSION_AND_DATE
+         1\&.0\&.1 (20140203_1618)
       
 .fi
 .if n \{\
@@ -74,18 +80,34 @@ qmake usage
 .if n \{\
 .RE
 .\}
+.PP
+releasing builds (from rpm \&.spec)
+.sp
+.if n \{\
+.RS 4
+.\}
+.nf
+         $ appver 1\&.0\&.2
+         APP_FULL_VERSION_TAG=1\&.0\&.2
+         APP_SHORT_VERSION_TAG=1\&.0\&.2
+         APP_BUILD_DATE=20140203_1618
+      
+.fi
+.if n \{\
+.RE
+.\}
 .sp
 .SH "SEE ALSO"
 .PP
 
-\m[blue]\fB\%http://safrm.net/projects/APPVER/\fR\m[]
+\m[blue]\fB\%http://safrm.net/projects/appver/\fR\m[]
 .SH "AUTHOR"
-
-    Miroslav Šafr <miroslav\&.safr@gmail\&.com>
-  .SH "LICENSE"
-
-   LGPL2
-  .SH "AUTHOR"
+.PP
+Miroslav Šafr <miroslav\&.safr@gmail\&.com>
+.SH "LICENSE"
+.PP
+LGPL2
+.SH "AUTHOR"
 .PP
 \fBMiroslav Safr\fR <\&miroslav\&.safr@gmail\&.com\&>
 .RS 4

@@ -2,12 +2,14 @@ Source: appver
 Section: devel
 Priority: optional
 Maintainer: Miroslav Safr <miroslav.safr@gmail.com>
-Build-Depends: debhelper (>= 5),git-core, rpmmake, xsltproc, docbook-xsl
-Standards-Version: 1.0.0
+Build-Depends: debhelper (>= 5),git-core, rpmmake, jenkins-support-scripts (>= 1.2.1)
+Standards-Version: 3.8.1
+Homepage: http://safrm.net/projects/appver
 
 Package: appver
 Architecture: all
 Depends: git-core
-Description: Smart way how to handle versions
+Description: Smart way how to handle versions \
+    for different types of building and platforms
 
 

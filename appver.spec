@@ -12,10 +12,7 @@ Vendor:     Miroslav Safr <miroslav.safr@gmail.com>
 Source0:    %{name}-%{version}.tar.bz2
 Autoreq: on
 Autoreqprov: on
-#BuildRequires:  xsltproc
-BuildRequires:  libxslt
-#BuildRequires:  docbook-xsl
-BuildRequires: docbook-xsl-stylesheets
+BuildRequires: jenkins-support-scripts >= 1.2.1
 
 %description
 smart way how to handle versions
@@ -24,7 +21,7 @@ smart way how to handle versions
 %setup -c -n ./%{name}-%{version}
 
 %build
-cd doc && ./update_docs.sh %{version} && cd -
+jss-docs-update ./doc -sv %{version} 
 
 %install
 rm -fr %{buildroot}
@@ -36,10 +33,6 @@ sed -i".bkp" "1,/^VERSION=/s/^VERSION=.*/VERSION=%{version}/" %{buildroot}%{_bin
 sed -i".bkp" "1,/^VERSION_DATE=/s/^VERSION_DATE=.*/VERSION_DATE=%{APP_BUILD_DATE}/" %{buildroot}%{_bindir}/appver && rm -f %{buildroot}%{_bindir}/appver.bkp
 install -d -m 755 %{buildroot}%{_mandir}/man1
 install -m 644 ./doc/manpages/appver.1* %{buildroot}%{_mandir}/man1
-install -d -m 755 %{buildroot}%{_docdir}/appver
-install -m 644 ./README %{buildroot}%{_docdir}/appver
-sed -i".bkp" "1,/Version: /s/Version:   */Version:   %{version} %{APP_BUILD_DATE}/"  %{buildroot}%{_docdir}/appver/README && rm -f %{buildroot}%{_docdir}/appver/README.bkp
-install -m 644 ./LICENSE.LGPL %{buildroot}%{_docdir}/appver
 
 %check
 for TEST in $(  grep -r -l -h "#\!/bin/sh" . )
@@ -54,9 +47,6 @@ done
 %files
 %defattr(-,root,root,-)
 %{_bindir}/appver
-%dir %{_docdir}/appver
-%{_docdir}/appver/README
-%{_docdir}/appver/LICENSE.LGPL
 %{_mandir}/man1/appver.1*
 
 

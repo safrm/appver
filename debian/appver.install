@@ -1,4 +1,2 @@
 appver /usr/bin/
-README /usr/share/doc/appver/
-LICENSE.LGPL /usr/share/doc/appver/
 doc/manpages/* /usr/share/man/man1/

@@ -7,7 +7,7 @@ MANDIR=/usr/share/man
 
 #root check
 USERID=`id -u`
-[ $USERID -eq "0" ] || { 
+[ $USERID -eq "0" ] || {
     echo "I cannot continue, you should be root or run it with sudo!"
     exit 0
 }
@@ -15,7 +15,7 @@ USERID=`id -u`
 #test
 sh -n ./appver
 if  [ $? != 0 ]; then
-	echo "syntax error in appver, exiting.." 
+	echo "syntax error in appver, exiting.."
 	exit 1
 fi
 
