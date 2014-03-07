@@ -1,7 +1,7 @@
 #!/usr/bin/make -f
+include /usr/share/dpkg/pkg-info.mk
 DEB_VERBOSE_ALL=yes
 export DH_VERBOSE=1
-	
 
 %:
 	dh  $@
@@ -11,9 +11,7 @@ export DH_VERBOSE=1
 #	rpmmake-debchangelog
 #	dh_installchangelogs debian/changelog
 override_dh_auto_build:
-	DEBVERSION=$(dpkg-parsechangelog | sed -n -e 's/^Version: //p' 2>/dev/null)
-	#rather avoid jenkins-support-scripts update because of cyclic deps
-	./doc/update_docs.sh $DEBVERSION 
+	cd doc && ./update_docs.sh $(DEB_VERSION_UPSTREAM) && cd ..
 	dh_auto_build
 	
 
