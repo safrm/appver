@@ -12,7 +12,8 @@ Vendor:     Miroslav Safr <miroslav.safr@gmail.com>
 Source0:    %{name}-%{version}.tar.bz2
 Autoreq: on
 Autoreqprov: on
-BuildRequires: jenkins-support-scripts >= 1.2.1
+BuildRequires: libxslt
+BuildRequires: docbook-xsl-stylesheets
 
 %description
 smart way how to handle versions
@@ -21,7 +22,8 @@ smart way how to handle versions
 %setup -c -n ./%{name}-%{version}
 
 %build
-jss-docs-update ./doc -sv %{version} 
+#rather avoid jenkins-support-scripts update because of cyclic deps
+cd doc && ./update_docs.sh ./ -sv %{version} && cd -
 
 %install
 rm -fr %{buildroot}
@@ -48,7 +50,5 @@ done
 %defattr(-,root,root,-)
 %{_bindir}/appver
 %{_mandir}/man1/appver.1*
-
-
 
 

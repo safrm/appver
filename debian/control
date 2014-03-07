@@ -2,7 +2,7 @@ Source: appver
 Section: devel
 Priority: optional
 Maintainer: Miroslav Safr <miroslav.safr@gmail.com>
-Build-Depends: debhelper (>= 5),git-core, rpmmake, jenkins-support-scripts (>= 1.2.1)
+Build-Depends: debhelper (>= 5),git-core, rpmmake, xsltproc, docbook-xsl
 Standards-Version: 3.8.1
 Homepage: http://safrm.net/projects/appver
 

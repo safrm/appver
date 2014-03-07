@@ -12,7 +12,8 @@ export DH_VERBOSE=1
 #	dh_installchangelogs debian/changelog
 override_dh_auto_build:
 	DEBVERSION=$(dpkg-parsechangelog | sed -n -e 's/^Version: //p' 2>/dev/null)
-	jss-docs-update ./doc -sv $DEBVERSION 
+	#rather avoid jenkins-support-scripts update because of cyclic deps
+	./doc/update_docs.sh ./doc -sv $DEBVERSION 
 	dh_auto_build
 	
 
