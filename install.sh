@@ -2,7 +2,6 @@
 #easier way how to handle version formats http://safrm.net/projects/appver/
 #author:  Miroslav Safr <miroslav.safr@gmail.com>
 BINDIR=/usr/bin/
-DOCDIR=/usr/share/doc
 MANDIR=/usr/share/man
 
 #root check
@@ -27,9 +26,5 @@ sed -i".bkp" "1,/^VERSION_DATE=/s/^VERSION_DATE=.*/VERSION_DATE=$APP_BUILD_DATE/
 MANPAGES=`find ./doc/manpages -type f`
 install -d -m 755 $MANDIR/man1
 install -m 644 $MANPAGES $MANDIR/man1
-
-DOCS="./README ./LICENSE.LGPL"
-install -d -m 755 $DOCDIR/appver
-install -m 644 $DOCS $DOCDIR/appver
 
 

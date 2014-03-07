@@ -23,13 +23,12 @@ smart way how to handle versions
 
 %build
 #rather avoid jenkins-support-scripts update because of cyclic deps
-cd doc && ./update_docs.sh ./ -sv %{version} && cd -
+cd doc && ./update_docs.sh %{version} && cd -
 
 %install
 rm -fr %{buildroot}
 
 mkdir -p %{buildroot}%{_bindir}
-mkdir -p %{buildroot}%{_datadir}/doc/appver
 install -m 755 ./appver %{buildroot}/usr/bin/
 sed -i".bkp" "1,/^VERSION=/s/^VERSION=.*/VERSION=%{version}/" %{buildroot}%{_bindir}/appver && rm -f %{buildroot}%{_bindir}/appver.bkp
 sed -i".bkp" "1,/^VERSION_DATE=/s/^VERSION_DATE=.*/VERSION_DATE=%{APP_BUILD_DATE}/" %{buildroot}%{_bindir}/appver && rm -f %{buildroot}%{_bindir}/appver.bkp

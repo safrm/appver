@@ -13,7 +13,7 @@ export DH_VERBOSE=1
 override_dh_auto_build:
 	DEBVERSION=$(dpkg-parsechangelog | sed -n -e 's/^Version: //p' 2>/dev/null)
 	#rather avoid jenkins-support-scripts update because of cyclic deps
-	./doc/update_docs.sh ./doc -sv $DEBVERSION 
+	./doc/update_docs.sh $DEBVERSION 
 	dh_auto_build
 	
 
