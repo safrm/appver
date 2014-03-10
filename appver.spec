@@ -29,7 +29,7 @@ cd doc && ./update_docs.sh %{version} && cd -
 rm -fr %{buildroot}
 
 mkdir -p %{buildroot}%{_bindir}
-install -m 755 ./appver %{buildroot}/usr/bin/
+install -m 755 ./appver %{buildroot}%{_bindir}
 sed -i".bkp" "1,/^VERSION=/s/^VERSION=.*/VERSION=%{version}/" %{buildroot}%{_bindir}/appver && rm -f %{buildroot}%{_bindir}/appver.bkp
 sed -i".bkp" "1,/^VERSION_DATE=/s/^VERSION_DATE=.*/VERSION_DATE=%{APP_BUILD_DATE}/" %{buildroot}%{_bindir}/appver && rm -f %{buildroot}%{_bindir}/appver.bkp
 install -d -m 755 %{buildroot}%{_mandir}/man1
