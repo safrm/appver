@@ -15,6 +15,11 @@ Autoreqprov: on
 BuildRequires: libxslt
 BuildRequires: docbook-xsl-stylesheets
 
+#buildroot fix for older distros
+%if 0%{?suse_version} <= 1200 || 0%{?fedora} < 18 || 0%{?rhel_version} < 500 || 0%{?centos_version} < 500
+BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+%endif
+
 %description
 smart way how to handle versions
 
