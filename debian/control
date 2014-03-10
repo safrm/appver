@@ -10,6 +10,6 @@ Package: appver
 Architecture: all
 Depends: git-core
 Description: Smart way how to handle versions \
-    for different types of building and platforms
+	for different types of building and platforms
 
 
