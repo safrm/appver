@@ -25,7 +25,7 @@ if [ ! -e $HTMLXSL ]; then
 fi
 
 #automatic version to avoid package recures
-#if command -v appver &>/dev/null; then . appver; else APP_SHORT_VERSION=NA ; APP_FULL_VERSION_TAG=NA ; APP_BUILD_DATE=`date +'%Y%m%d_%H%M'`; fi
+#if command -v appver &>/dev/null ; then . appver ; else APP_SHORT_VERSION=NA ; APP_FULL_VERSION_TAG=NA ; APP_BUILD_DATE=`date +'%Y%m%d_%H%M'` ; fi
 . ../appver $1
 
 #first syntax and DTD check
@@ -45,8 +45,8 @@ rm -fr $TEMP_DIR && mkdir $TEMP_DIR
 for PAGEXML in $(  find . -type f -name "*1.xml" )
 do
     cp $PAGEXML $TEMP_DIR/
-    sed -i".bkp" "1,/<productnumber>/s/<productnumber>.*/<productnumber>$APP_SHORT_VERSION_TAG<\/productnumber>/" $TEMP_DIR/$PAGEXML  && rm -f $TEMP_DIR/$PAGEXML.bkp
-    sed -i".bkp" "1,/<\/date>/s/<date>.*/<date>$APP_BUILD_DATE<\/date>/" $TEMP_DIR/$PAGEXML  && rm -f $TEMP_DIR/$PAGEXML.bkp
+    sed -i".bkp" "1,/<productnumber>/s/<productnumber>.*/<productnumber>$APP_SHORT_VERSION_TAG<\/productnumber>/" $TEMP_DIR/$PAGEXML && rm -f $TEMP_DIR/$PAGEXML.bkp
+    sed -i".bkp" "1,/<\/date>/s/<date>.*/<date>$APP_BUILD_DATE<\/date>/" $TEMP_DIR/$PAGEXML && rm -f $TEMP_DIR/$PAGEXML.bkp
 done
 
 #generate man and html pages

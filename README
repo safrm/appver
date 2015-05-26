@@ -28,7 +28,7 @@ declare -x APP_SHORT_VERSION_TAG="0.0.1"
 
 usage in scripts without dependency:
 #automatic version 
-if command -v appver &>/dev/null; then . appver; else APP_SHORT_VERSION=NA ; APP_FULL_VERSION_TAG=NA ; APP_BUILD_DATE=`date +'%Y%m%d_%H%M'`; fi
+if command -v appver &>/dev/null ; then . appver ; else APP_SHORT_VERSION=NA ; APP_FULL_VERSION_TAG=NA ; APP_BUILD_DATE=`date +'%Y%m%d_%H%M'` ; fi
 
 qmake 2x usage:
 #appver, win/lin version system
