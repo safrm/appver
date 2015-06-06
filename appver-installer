@@ -23,6 +23,16 @@ command_exists() {
     command -v "$1" 1>/dev/null 2>&1 ;
 }
 
+basic_scripts_test() {
+    for TEST in $( grep -r -l -h "#\!/bin/sh" --exclude-dir=.git . )
+    do
+        sh -n "$TEST"
+        if  [ $? != 0 ]; then
+            fail "syntax error in $TEST, exiting.."
+        fi
+    done
+}
+
 #root check
 [ `id -u` -ne 0 ] && [ `uname -s | grep -i linux` ] &&
     fail "Cannot continue, you should be root or run it with sudo!"
@@ -44,15 +54,6 @@ else
     [ -z "$APP_FULL_VERSION_TAG" ] && APP_FULL_VERSION_TAG=NA
     [ -z "$APP_BUILD_DATE" ] && APP_BUILD_DATE=`date +'%Y%m%d_%H%M'`
 fi
-
-#basic bash tests
-for TEST in $( grep -r -l -h "#\!/bin/sh" --exclude-dir=.git . )
-do
-    sh -n "$TEST"
-    if  [ $? != 0 ]; then
-        fail "syntax error in $TEST, exiting.."
-    fi
-done
 
 #update documentation
 if [ -a jss-docs-update ]; then
