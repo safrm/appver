@@ -4,32 +4,23 @@
 VERSION=NA
 VERSION_DATE=NA
 
+#defaults
+APP_FULL_VERSION_TAG=NA
+APP_SHORT_VERSION_TAG=NA
+APP_BUILD_DATE=NA
+
 #version can be forced by argument for packaging builds
 if [ -z "$1" ]; then
-    APP_FULL_VERSION_TAG=`git describe --tags --dirty=* 2> /dev/null`
-    APP_SHORT_VERSION_TAG=`git describe --abbrev=0 2> /dev/null`
+    APP_FULL_VERSION_TAG=`git describe --tags --dirty=* 2> /dev/null | sed 's/-[^-]\+$$//' | sed 's/-/_/g'`
+    APP_SHORT_VERSION_TAG=`git describe --abbrev=0 2> /dev/null | sed 's/-[^-]\+$$//' | sed 's/-/_/g'`
 else
     APP_FULL_VERSION_TAG="$1"
     APP_SHORT_VERSION_TAG="$APP_FULL_VERSION_TAG"
-fi    
+fi
 APP_BUILD_DATE=`date +'%Y%m%d_%H%M'`
 
-if [ "xAPP_FULL_VERSION_TAG" = "x" ]
-then
-  APP_FULL_VERSION_TAG=NA
-fi
 echo "APP_FULL_VERSION_TAG=$APP_FULL_VERSION_TAG"
-
-if [ "xAPP_SHORT_VERSION_TAG" = "x" ]
-then
-  APP_SHORT_VERSION_TAG=NA
-fi
 echo "APP_SHORT_VERSION_TAG=$APP_SHORT_VERSION_TAG"
-
-if [ "xAPP_BUILD_DATE" = "x" ]
-then
-  APP_BUILD_DATE=NA
-fi
 echo "APP_BUILD_DATE=$APP_BUILD_DATE"
 
 #combinations
