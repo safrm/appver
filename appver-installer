@@ -1,0 +1,59 @@
+#!/bin/sh
+#easier way how to handle development installations http://safrm.net/projects/appver/
+#author:  Miroslav Safr <miroslav.safr@gmail.com>
+BINDIR=/usr/bin
+COMPLETION_DIR=/etc/bash_completion.d
+MANDIR=/usr/share/man
+
+fail() { printf "\n\033[01;31mERROR: $*\033[00m\n" ; exit 1 ; }
+verbose() { [ ${VERBOSE_FLAG:-0 } -eq 0 ] || echo "\033[36m$*\033[00m" ; }
+basic_usage() {
+    echo " Usage: `basename $0` [OPTIONS]  Development installer"
+    echo " OPTIONS:"
+    echo "          -v, --verbose............... verbose"
+    echo "          -h, --help.................. prints help"
+}
+
+#root check
+[ `id -u` -ne 0 ] && [ `uname -s | grep -i linux` ] && 
+    fail "Cannot continue, you should be root or run it with sudo!"
+
+#install commands
+if command -v install 1>/dev/null 2>&1 ; then
+    INSTALL_755="install -m 0755 -v "
+    INSTALL_644="install -m 0644 -v "
+else
+    INSTALL_755="cp -afv "
+    INSTALL_644="$INSTALL_755"
+fi
+
+#automatic version
+if command -v appver 1>/dev/null 2>&1 ; then 
+    . appver
+else 
+    APP_SHORT_VERSION=NA 
+    APP_FULL_VERSION_TAG=NA 
+    APP_BUILD_DATE=`date +'%Y%m%d_%H%M'` 
+fi
+
+#basic bash tests
+for TEST in $( grep -r -l -h "#\!/bin/sh" --exclude-dir=.git . )
+do
+    sh -n $TEST
+    if  [ $? != 0 ]; then
+        fail "syntax error in $TEST, exiting.."
+    fi
+done
+
+#update documentation
+[ -a jss-docs-update ]; then 
+    jss-docs-update ./doc 
+fi
+
+#auto install man pages
+MANPAGES=`find ./doc/manpages -type f`
+if [ -n "$MANPAGES" ]; then 
+    mkdir -p -m 775 $MANDIR/man1
+    $INSTALL_644 $MANPAGES $MANDIR/man1
+fi
+
