@@ -19,13 +19,16 @@ if [ -n "$1" ]; then
     sed -i".bkp" "1,/^VERSION_DATE=/s/^VERSION_DATE=.*/VERSION_DATE=$APP_BUILD_DATE/" "$1" && rm -f "$1".bkp
 fi
 }
+command_exists() {
+    command -v "$1" 1>/dev/null 2>&1 ;
+}
 
 #root check
 [ `id -u` -ne 0 ] && [ `uname -s | grep -i linux` ] &&
     fail "Cannot continue, you should be root or run it with sudo!"
 
 #install commands
-if command -v install 1>/dev/null 2>&1 ; then
+if command_exists install ; then
     INSTALL_755="install -m 0755 -v "
     INSTALL_644="install -m 0644 -v "
 else
@@ -34,7 +37,7 @@ else
 fi
 
 #automatic version
-if command -v appver 1>/dev/null 2>&1 ; then
+if command_exists ; then
     . appver
 else
     [ -z "$APP_SHORT_VERSION" ] && APP_SHORT_VERSION=NA
