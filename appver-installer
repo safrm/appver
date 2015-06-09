@@ -47,7 +47,7 @@ else
 fi
 
 #automatic version
-if command_exists ; then
+if command_exists appver ; then
     . appver
 else
     [ -z "$APP_SHORT_VERSION" ] && APP_SHORT_VERSION=NA
@@ -56,7 +56,7 @@ else
 fi
 
 #update documentation
-if [ -a jss-docs-update ]; then
+if command_exists jss-docs-update ; then
     jss-docs-update ./doc
 fi
 
