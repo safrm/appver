@@ -39,9 +39,11 @@ appver_basic_scripts_test() {
 
 #install commands
 if appver_command_exists install ; then
+    MKDIR_755="mkdir -p -m 0755 "
     INSTALL_755="install -m 0755 -v "
     INSTALL_644="install -m 0644 -v "
 else
+    MKDIR_755="mkdir -p "
     INSTALL_755="cp -afv "
     INSTALL_644="$INSTALL_755"
 fi

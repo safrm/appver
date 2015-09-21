@@ -6,6 +6,7 @@
 
 appver_basic_scripts_test
 
+$MKDIR_755 $BINDIR
 $INSTALL_755 ./appver $BINDIR
 $INSTALL_755 ./appver-installer $BINDIR
 appver_update_version_and_date $BINDIR/appver
