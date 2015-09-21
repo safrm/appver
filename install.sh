@@ -4,9 +4,8 @@
 . ./appver
 . ./appver-installer
 
-basic_scripts_test
+appver_basic_scripts_test
 
 $INSTALL_755 ./appver $BINDIR
 $INSTALL_755 ./appver-installer $BINDIR
-update_version_and_date() $BINDIR/appver
-
+appver_update_version_and_date $BINDIR/appver
