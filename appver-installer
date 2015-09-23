@@ -24,7 +24,7 @@ appver_command_exists() {
 }
 
 appver_basic_scripts_test() {
-    for TEST in $( grep -r -l -h "#\!/bin/sh" --exclude-dir=.git . )
+    for TEST in $( grep -r -l -h "#\!/bin/sh" --exclude-dir=.git --exclude-dir=test . )
     do
         sh -n "$TEST"
         if  [ $? != 0 ]; then
