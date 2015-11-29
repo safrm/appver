@@ -63,7 +63,7 @@ if appver_command_exists jss-docs-update ; then
 fi
 
 #auto install man pages
-MANPAGES=`find ./doc/manpages -type f`
+MANPAGES=`find ./doc/manpages -type f 2> /dev/null`
 if [ -n "$MANPAGES" ]; then
     mkdir -p -m 775 $MANDIR/man1
     $INSTALL_644 $MANPAGES $MANDIR/man1
