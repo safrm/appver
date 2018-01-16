@@ -10,8 +10,9 @@ verbose() { [ ${VERBOSE_FLAG:-0 } -eq 0 ] || echo "\033[36m$*\033[00m" ; }
 appver_basic_usage() {
     echo " Usage: `basename $0` [OPTIONS]  Development installer"
     echo " OPTIONS:"
-    echo "          -v, --verbose............... verbose"
-    echo "          -h, --help.................. prints help"
+    echo "          -v, --verbose............. verbose"
+    echo "          -u, --user <dir>.......... install to local dir (~/.local)"
+    echo "          -h, --help................ prints help"
 }
 appver_update_version_and_date() {
 if [ -n "$1" ]; then
@@ -19,9 +20,7 @@ if [ -n "$1" ]; then
     sed -i".bkp" "1,/^VERSION_DATE=/s/^VERSION_DATE=.*/VERSION_DATE=$APP_BUILD_DATE/" "$1" && rm -f "$1".bkp
 fi
 }
-appver_command_exists() {
-    command -v "$1" 1>/dev/null 2>&1 ;
-}
+appver_command_exists() { command -v "$1" 1>/dev/null 2>&1 ; }
 
 appver_basic_scripts_test() {
     for TEST in $( grep -r -l -h "#\!/bin/sh" --exclude-dir=.git --exclude-dir=test . )
@@ -33,9 +32,23 @@ appver_basic_scripts_test() {
     done
 }
 
+while [ $# -gt 0 ]; do
+    case "$1" in
+        -u|--user) PREFIX=$HOME/.local ;;
+    esac
+    shift
+done
+
+if [ -n "$PREFIX" ]; then
+    echo "installing to $PREFIX"
+    BINDIR=$PREFIX/bin
+    COMPLETION_DIR=$PREFIX/etc/bash
+    MANDIR=$PREFIX/man
+fi
+
 #root check
-[ `id -u` -ne 0 ] && [ `uname -s | grep -i linux` ] &&
-    fail "Cannot continue, you should be root or run it with sudo!"
+[ -z "$PREFIX" ] && [ `id -u` -ne 0 ] && [ `uname -s | grep -i linux` ] &&
+    fail "Cannot continue, you should be root, run it with sudo or use -u for user installation!"
 
 #install commands
 if appver_command_exists install ; then
