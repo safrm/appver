@@ -18,6 +18,7 @@ appver_update_version_and_date() {
 if [ -n "$1" ]; then
     sed -i".bkp" "1,/^VERSION=/s/^VERSION=.*/VERSION=$APP_FULL_VERSION_TAG/" "$1" && rm -f "$1".bkp
     sed -i".bkp" "1,/^VERSION_DATE=/s/^VERSION_DATE=.*/VERSION_DATE=$APP_BUILD_DATE/" "$1" && rm -f "$1".bkp
+    [ -e /data/data/com.termux/files/usr/bin/termux-fix-shebang ] && termux-fix-shebang "$1"
 fi
 }
 appver_command_exists() { command -v "$1" 1>/dev/null 2>&1 ; }
